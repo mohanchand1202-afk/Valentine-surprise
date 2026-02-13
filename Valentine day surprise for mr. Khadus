@@ -1,0 +1,42 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Valentine Surprise 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:'Poppins',sans-serif;background:#000;overflow:hidden}/* hearts */ .heart{position:fixed;top:-10vh;font-size:18px;animation:fall linear infinite;pointer-events:none} @keyframes fall{to{transform:translateY(110vh);opacity:0}}
+
+/* music */ .music-btn{position:fixed;top:15px;right:15px;background:#ff3b3b;color:#fff;border:none;border-radius:999px;padding:10px 16px;font-weight:600;z-index:1000}
+
+/* screens */ .screen{display:none;height:100vh;width:100vw;align-items:center;justify-content:center;background:#f8c8dc;padding:20px;position:absolute;top:0;left:0} .screen.active{display:flex}
+
+.card{background:#ffd6e8;border-radius:24px;padding:30px 25px;max-width:420px;width:100%;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.2)} .emoji{font-size:60px}
+
+button{border:none;padding:12px 22px;border-radius:999px;font-size:16px;font-weight:600;cursor:pointer} .yes{background:#ff3b3b;color:#fff;transition:.3s} .no{background:#3b6cff;color:#fff;position:absolute} .btns{position:relative;display:flex;gap:15px;justify-content:center;margin-top:20px}
+
+/* ring */ .ring-box{width:160px;height:120px;margin:20px auto;cursor:pointer;position:relative} .ring-lid{height:50%;background:#c2185b;border-radius:12px 12px 0 0;transform-origin:top;transition:.6s} .ring-base{height:60%;background:#e91e63;border-radius:0 0 12px 12px;display:flex;align-items:center;justify-content:center} .ring{font-size:40px;opacity:0;transform:scale(0);transition:.6s}
+
+/* cake */ .cake{font-size:80px;cursor:pointer}
+
+/* typing letter */ .letter{background:#fff;border-radius:14px;padding:20px;text-align:left;font-size:14px;line-height:1.6} .cursor{display:inline-block;width:2px;background:#333;animation:blink 1s infinite} @keyframes blink{50%{opacity:0}} </style>
+
+</head>
+<body><button class="music-btn" onclick="toggleMusic()">🎵 Music</button> <audio id="bgm" loop><source src="music.mp3" type="audio/mpeg"></audio>
+
+<script>
+setInterval(()=>{const h=document.createElement('div');h.className='heart';h.innerText='❤️';h.style.left=Math.random()*100+'vw';h.style.animationDuration=3+Math.random()*5+'s';document.body.appendChild(h);setTimeout(()=>h.remove(),8000)},350);
+</script><!-- Slides --><div class="screen active" id="s1"><div class="card"><div class="emoji">🐻</div><h2>Will you be mine 🥺?</h2><p>Life is an incredible journey, and I want to spend every single second of it with you.</p><div class="btns"><button class="yes" onclick="growYes(this);go('s2')">YES</button><button class="no" onmouseover="moveNo(this)">NO</button></div></div></div><div class="screen" id="s2"><div class="card"><div class="emoji">🥹</div><h2>Think again 😭</h2><div class="btns"><button class="yes" onclick="growYes(this);go('s3')">YES</button><button class="no" onmouseover="moveNo(this)">NO</button></div></div></div><div class="screen" id="s3"><div class="card"><div class="emoji">😡</div><h2>Are you sure 😠?</h2><button class="yes" onclick="growYes(this);go('s4')">YES</button></div></div><div class="screen" id="s4"><div class="card"><div class="emoji">🐱</div><h2>See This 🥺</h2><button class="yes" onclick="go('s5')">YES</button></div></div><div class="screen" id="s5"><div class="card"><div class="emoji">💑</div><h2>Happy Valentine Day Baby! 💍</h2><p>Every second with you is a celebration 💖</p><button class="yes" onclick="go('ring')">See my gifts →</button></div></div><!-- Ring --><div class="screen" id="ring"><div class="card"><h2>I promise you 💍</h2><div class="ring-box" onclick="openRing()"><div class="ring-lid" id="lid"></div><div class="ring-base"><div class="ring" id="ringEmoji">💍</div></div></div><p id="ringText">Tap to open</p><button class="yes" id="ringNext" style="display:none" onclick="go('cake')">Next →</button></div></div><!-- Cake --><div class="screen" id="cake"><div class="card"><h2>Let's cut the cake 🎂</h2><div class="cake" onclick="cutCake()">🎂</div><p id="cakeText">Tap the cake</p><button class="yes" id="cakeNext" style="display:none" onclick="go('letter')">Continue →</button></div></div><!-- Letter --><div class="screen" id="letter"><div class="card"><h2>For You ❤️</h2><div class="letter" id="typingBox"></div></div></div><script>
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active')}
+function moveNo(btn){btn.style.left=Math.random()*80+'%';btn.style.top=Math.random()*80+'%'}
+let size=1;function growYes(btn){size+=0.15;btn.style.transform=`scale(${size})`}
+function toggleMusic(){const m=document.getElementById('bgm');m.paused?m.play():m.pause()}
+function openRing(){document.getElementById('lid').style.transform='rotateX(120deg)';const r=document.getElementById('ringEmoji');r.style.opacity=1;r.style.transform='scale(1)';document.getElementById('ringText').innerText='I promise to love you forever ❤️';document.getElementById('ringNext').style.display='inline-block'}
+function cutCake(){document.querySelector('.cake').innerText='🍰';document.getElementById('cakeText').innerText='Happy Valentine’s Day 🎉';document.getElementById('cakeNext').style.display='inline-block'}
+
+const msg="My love,\n\nI promise to stand by you, laugh with you, fight for you, and love you every single day of my life ❤️\n\nYou are my forever.";
+let i=0;function typeLetter(){const box=document.getElementById('typingBox');if(i<msg.length){box.innerHTML+=msg[i]==='\n'?'<br>':msg[i];i++;setTimeout(typeLetter,60)}}
+document.getElementById('letter').addEventListener('click',()=>{if(i===0)typeLetter()},{once:true});
+</script></body>
+</html>
