@@ -23,7 +23,7 @@ button{border:none;padding:12px 22px;border-radius:999px;font-size:16px;font-wei
 /* typing letter */ .letter{background:#fff;border-radius:14px;padding:20px;text-align:left;font-size:14px;line-height:1.6} .cursor{display:inline-block;width:2px;background:#333;animation:blink 1s infinite} @keyframes blink{50%{opacity:0}} </style>
 
 </head>
-<body><button class="music-btn" onclick="toggleMusic()">🎵 Music</button> <audio id="bgm" loop><source src="music.mp3" type="audio/mpeg"></audio>
+<body><button class="music-btn" onclick="toggleMusic()">🎵 Music</button> <audio id="bgm" loop><source src="Music.mp3" type="audio/mpeg"></audio>
 
 <script>
 setInterval(()=>{const h=document.createElement('div');h.className='heart';h.innerText='❤️';h.style.left=Math.random()*100+'vw';h.style.animationDuration=3+Math.random()*5+'s';document.body.appendChild(h);setTimeout(()=>h.remove(),8000)},350);
